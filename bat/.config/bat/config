@@ -1,0 +1,8 @@
+# 设置主题为 TwoDark
+--theme="TwoDark"
+
+--style="plain,changes"
+
+# 在终端中以斜体输出文本（不是所有终端都支持）
+--italic-text=always
+
