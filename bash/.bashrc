@@ -60,11 +60,39 @@ alias vim='nvim'
 alias cat='bat'
 
 # ----- 强化提示符 PS1 -----
-if [[ $EUID == 0 ]]; then
-  PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
-else
-  PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
-fi
+# ============================
+# Git prompt helper
+# ============================
+__git_ps1_status() {
+    # 不在 git 仓库中直接返回
+    git rev-parse --is-inside-work-tree &>/dev/null || return
+
+    local branch status
+
+    # 当前分支
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null \
+        || git describe --tags --exact-match 2>/dev/null \
+        || git rev-parse --short HEAD 2>/dev/null)
+
+    # 仓库状态
+    if ! git diff --quiet --ignore-submodules --cached; then
+        status="+"
+    elif ! git diff --quiet --ignore-submodules; then
+        status="*"
+    else
+        status=""
+    fi
+
+    # 未跟踪文件
+    if [[ -n $(git ls-files --others --exclude-standard 2>/dev/null) ]]; then
+        status="${status}?"
+    fi
+
+    printf " (%s%s)" "$branch" "$status"
+}
+
+PS1='\[\e[1;32m\][\u@\h \W]\[\e[33m\]$(__git_ps1_status)\[\e[1;32m\]\$\[\e[0m\] '
+
 
 # ----- 安全：防止 rm 覆盖 -----
 alias rm='rm -i'
