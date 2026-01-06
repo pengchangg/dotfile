@@ -91,7 +91,7 @@ __git_ps1_status() {
     printf " (%s%s)" "$branch" "$status"
 }
 
-PS1='\[\e[1;32m\][\u@\h \W]\[\e[33m\]$(__git_ps1_status)\[\e[1;32m\]\$\[\e[0m\] '
+PS1=' \[\e[1;32m\][\u@\h \W]\[\e[33m\]$(__git_ps1_status)\[\e[1;32m\]\$\[\e[0m\] '
 
 
 # ----- 安全：防止 rm 覆盖 -----
@@ -134,6 +134,7 @@ fi
 # 加载本地私有配置（可选）
 # -------------------------------
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
+[ -f ~/.profile ] && source ~/.profile
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
