@@ -144,3 +144,29 @@ export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08
 
 
 alias reloadBash="source ~/.bashrc"
+
+# tmux  alias
+# 快速 attach 或新建 session
+alias ta='tmux attach -t'        # 用法：ta mysession
+alias tn='tmux new -s'           # 用法：tn mysession
+
+# 列出 session
+alias tls='tmux ls'
+
+# 杀掉 session
+alias tk='tmux kill-session -t'  # 用法：tk mysession
+
+# 重载配置
+alias trc='tmux source-file ~/.tmux.conf \; display-message "tmux config reloaded"'
+
+# ===== tmux session 自动补全 =====
+_tmux_sessions() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -W "$(tmux ls 2>/dev/null | awk -F: '{print $1}')" -- "$cur") )
+}
+
+# 绑定到 ta / tk / tn（可扩展）
+complete -F _tmux_sessions ta
+complete -F _tmux_sessions tk
+complete -F _tmux_sessions tn
+
