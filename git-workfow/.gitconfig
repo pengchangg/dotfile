@@ -15,3 +15,11 @@
 [merge]
     conflictStyle = zdiff3
 
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  ci = commit
+  last = log -1 --oneline
+  lg = log --graph --oneline --decorate
+
