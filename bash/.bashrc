@@ -173,4 +173,24 @@ complete -F _tmux_sessions tk
 alias rgs='rg --hidden --no-ignore --glob "!**/.git/**"  -n -C 2 --color=always'
 alias rgl='rg --hidden --no-ignore --glob "!**/.git/**" -l'  # 只列出包含匹配内容的文件
 
+export FZF_DEFAULT_OPTS='
+--height 60%
+--border
+--info=inline
+--preview "bat --style=numbers --color=always {} | head -500"
+'
+
+# 默认命令列出文件（fd 更快）
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+
+# 文件选择并打开
+fe() {
+  local file
+  file=$(fzf \
+    --height 60% \
+    --reverse \
+    --border \
+    --preview "bat --style=numbers --color=always {} | head -500") || return
+  ${EDITOR:-vim} "$file"
+}
 
