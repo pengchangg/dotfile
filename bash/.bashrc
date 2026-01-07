@@ -134,7 +134,6 @@ fi
 # 加载本地私有配置（可选）
 # -------------------------------
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
-[ -f ~/.profile ] && source ~/.profile
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.git-workflow.sh ] && source ~/.git-workflow.sh
