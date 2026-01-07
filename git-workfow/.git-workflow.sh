@@ -30,7 +30,7 @@ alias gco='git checkout'
 alias gbr='git branch'
 alias glast='git log -1 --oneline'
 alias glg='git log --graph --oneline --decorate'
-alias gtl='git ls-remote --tags origin'
+alias gtl="git ls-remote --tags origin | awk '!/\^\{\}/'"
 
 # ---------- branch creation ----------
 
