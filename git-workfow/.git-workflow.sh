@@ -58,6 +58,7 @@ gcm() {
   [ -z "$1" ] && echo 'usage: gcm "type: message"' && return 1
 
   git status
+  # ----------手动确认------------
   echo
 
   read -r -p "Continue and stage ALL changes? [y/N]: " confirm
