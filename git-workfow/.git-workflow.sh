@@ -30,6 +30,7 @@ alias gco='git checkout'
 alias gbr='git branch'
 alias glast='git log -1 --oneline'
 alias glg='git log --graph --oneline --decorate'
+alias gtl='git ls-remote --tags origin'
 
 # ---------- branch creation ----------
 
@@ -127,9 +128,12 @@ gdone() {
 
 gtag() {
   _git_require_repo || return 1
-  [ -z "$1" ] && echo "usage: gtag vX.Y.Z" && return 1
+  [ -z "$1" ] && echo "usage: gtag-annotated vX.Y.Z" && return 1
+  [ -z "$2" ] && echo "usage: gtag-annotated vX.Y.Z \"message\"" && return 1
 
-  git tag "$1" && git push origin "$1"
+  git tag -a "$1" -m "$2" || return 1
+  git push origin "$1" || return 1
+  echo "annotated tag $1 created with message: $2"
 }
 
 # ---------- safety ----------
@@ -146,17 +150,17 @@ ghelp() {
   cat <<EOF
 Git Workflow Commands:
 
-  gfeat <name>    create feat/<name> from main
-  gfix <name>     create fix/<name> from main
-  gcm "msg"       commit with message
-  gwhere          show current branch and status
-  gmerge          merge current branch into main
-  gclean          delete merged branches
-  gdone           gmerge + gclean
-  gtag vX.Y.Z     create and push tag
+  gfeat <name>          create feat/<name> from main
+  gfix <name>           create fix/<name> from main
+  gcm "msg"             commit with message
+  gwhere                show current branch and status
+  gmerge                merge current branch into main
+  gclean                delete merged branches
+  gdone                 gmerge + gclean
+  gtag vX.Y.Z "msg"     create and push tag
 
 Base aliases:
- gad, gst, gco, gbr, glast, glg
+ gad, gst, gco, gbr, glast, glg, gtl
 EOF
 }
 
