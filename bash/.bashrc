@@ -168,5 +168,9 @@ _tmux_sessions() {
 # 绑定到 ta / tk / tn（可扩展）
 complete -F _tmux_sessions ta
 complete -F _tmux_sessions tk
-complete -F _tmux_sessions tn
+
+# rg 搜索忽略文件
+alias rgs='rg --hidden --no-ignore --glob "!**/.git/**"  -n -C 2 --color=always'
+alias rgl='rg --hidden --no-ignore --glob "!**/.git/**" -l'  # 只列出包含匹配内容的文件
+
 
