@@ -12,7 +12,7 @@ export VISUAL=nvim
 export PAGER=less
 
 # ---------- PATH（去重安全写法） ----------
-path_prepend() {
+function path_prepend {
     case ":$PATH:" in
         *":$1:"*) ;;
         *) PATH="$1:$PATH" ;;

@@ -10,7 +10,7 @@ if [[ $- != *i* ]] && [ -z "${TMUX:-}" ]; then
 fi
 
 # 重新加载bashrc的函数（必须在检查之前定义，以便可以调用）
-reloadBash() {
+function reloadBash {
     export __FORCE_RELOAD_BASHRC__=1
     unset __BASHRC_LOADED__
     source ~/.bashrc

@@ -1,4 +1,4 @@
-__git_ps1_status() {
+function __git_ps1_status {
     git rev-parse --is-inside-work-tree &>/dev/null || return
 
     local branch status

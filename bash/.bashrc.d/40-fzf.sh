@@ -8,7 +8,7 @@ export FZF_DEFAULT_OPTS='
 --preview "bat --style=numbers --color=always {} | head -500"
 '
 
-fe() {
+function fe {
     local f
     f=$(fzf) || return
     ${EDITOR:-vim} "$f"
