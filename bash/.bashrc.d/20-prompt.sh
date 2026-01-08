@@ -13,5 +13,7 @@ __git_ps1_status() {
     printf " (%s%s)" "$branch" "$status"
 }
 
-PS1='\[\e[1;32m\][\u@\h \W]\[\e[33m\]$(__git_ps1_status)\[\e[1;32m\]\$\[\e[0m\] '
+# Prompt 配置
+# 使用 \033 而不是 \e，在某些环境下更兼容（特别是 tmux）
+PS1='\[\033[1;32m\][\u@\h \W]\[\033[33m\]$(__git_ps1_status)\[\033[1;32m\]\$\[\033[0m\] '
 
