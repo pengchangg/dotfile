@@ -1,0 +1,13 @@
+# 备份目录
+.backup/
+
+# 临时文件
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# 私有配置文件
+bash/.bashrc.local
